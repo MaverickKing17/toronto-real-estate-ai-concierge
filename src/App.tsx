@@ -4,6 +4,7 @@ import { ChatWindow } from './components/ChatWindow';
 import { StatCard } from './components/StatCard';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { InfoPage } from './components/InfoPage';
 import { LiveChatWidget } from './components/LiveChatWidget';
 import { OnboardingTour } from './components/OnboardingTour';
 import { MOCK_LEADS, Lead } from './constants';
@@ -162,6 +163,17 @@ export default function App() {
             </div>
           </div>
         );
+      case 'privacy':
+      case 'terms':
+      case 'dmca':
+      case 'pipeda':
+      case 'casl':
+      case 'market-reports':
+      case 'faqs':
+      case 'api-docs':
+      case 'security':
+      case 'iso':
+        return <InfoPage view={activeView} onBack={() => setActiveView('dashboard')} />;
       default:
         return null;
     }
@@ -183,7 +195,7 @@ export default function App() {
           <AnimatePresence mode="wait">
             {renderView()}
           </AnimatePresence>
-          <Footer />
+          <Footer onViewChange={setActiveView} />
         </main>
       </div>
 

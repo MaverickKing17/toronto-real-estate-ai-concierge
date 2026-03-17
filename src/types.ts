@@ -1,4 +1,4 @@
-export type View = 'dashboard' | 'messages' | 'leads' | 'settings';
+export type View = 'dashboard' | 'messages' | 'leads' | 'settings' | 'privacy' | 'terms' | 'dmca' | 'pipeda' | 'casl' | 'market-reports' | 'faqs' | 'api-docs' | 'security' | 'iso';
 
 export interface Lead {
   id: string;

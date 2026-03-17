@@ -1,7 +1,13 @@
 import React from 'react';
 import { Shield, Globe, Lock, Info, ExternalLink, MapPin } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+import { View } from '../types';
+
+interface FooterProps {
+  onViewChange: (view: View) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onViewChange }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -25,22 +31,22 @@ export const Footer: React.FC = () => {
         <div>
           <h4 className="text-[10px] uppercase tracking-[0.2em] text-gold font-bold mb-6">Legal & Compliance</h4>
           <ul className="space-y-4">
-            <FooterLink label="Privacy Policy" />
-            <FooterLink label="Terms of Service" />
-            <FooterLink label="DMCA Notice" />
-            <FooterLink label="PIPEDA Compliance" />
-            <FooterLink label="CASL Policy" />
+            <FooterLink label="Privacy Policy" onClick={() => onViewChange('privacy')} />
+            <FooterLink label="Terms of Service" onClick={() => onViewChange('terms')} />
+            <FooterLink label="DMCA Notice" onClick={() => onViewChange('dmca')} />
+            <FooterLink label="PIPEDA Compliance" onClick={() => onViewChange('pipeda')} />
+            <FooterLink label="CASL Policy" onClick={() => onViewChange('casl')} />
           </ul>
         </div>
 
         <div>
           <h4 className="text-[10px] uppercase tracking-[0.2em] text-gold font-bold mb-6">Resources</h4>
           <ul className="space-y-4">
-            <FooterLink label="Market Reports" />
-            <FooterLink label="Broker FAQs" />
-            <FooterLink label="API Documentation" />
-            <FooterLink label="Security Whitepaper" />
-            <FooterLink label="ISO Certification" />
+            <FooterLink label="Market Reports" onClick={() => onViewChange('market-reports')} />
+            <FooterLink label="Broker FAQs" onClick={() => onViewChange('faqs')} />
+            <FooterLink label="API Documentation" onClick={() => onViewChange('api-docs')} />
+            <FooterLink label="Security Whitepaper" onClick={() => onViewChange('security')} />
+            <FooterLink label="ISO Certification" onClick={() => onViewChange('iso')} />
           </ul>
         </div>
 
@@ -92,11 +98,14 @@ export const Footer: React.FC = () => {
   );
 };
 
-const FooterLink = ({ label }: { label: string }) => (
+const FooterLink = ({ label, onClick }: { label: string, onClick?: () => void }) => (
   <li>
-    <a href="#" className="text-xs text-white/60 hover:text-gold transition-colors flex items-center gap-2 group">
+    <button 
+      onClick={onClick}
+      className="text-xs text-white/60 hover:text-gold transition-colors flex items-center gap-2 group text-left"
+    >
       {label}
       <ExternalLink size={10} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-    </a>
+    </button>
   </li>
 );
