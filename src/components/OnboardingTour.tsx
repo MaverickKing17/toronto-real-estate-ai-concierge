@@ -31,7 +31,7 @@ const TOUR_STEPS: TourStep[] = [
   {
     targetId: 'tour-chat',
     title: 'AI Broker Intelligence',
-    content: 'Maintain your brand prestige at scale. ARGUS AI handles complex inquiries with the tone of a seasoned broker. Try instructing the AI to "Draft a follow-up for the Penthouse inquiry."',
+    content: 'Maintain your brand prestige at scale. ARGUS AI handles complex inquiries with the tone of a seasoned broker. Try instructing the AI to "Draft a follow-up for the Yorkville Penthouse inquiry."',
     position: 'left'
   },
   {

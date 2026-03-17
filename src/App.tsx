@@ -59,9 +59,9 @@ export default function App() {
                   <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold">View All</button>
                 </div>
                 <div className="space-y-6">
-                  <ActivityItem icon={<Users className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'The Glass House'" time="5m ago" />
-                  <ActivityItem icon={<FileText className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Penthouse V" time="1h ago" />
-                  <ActivityItem icon={<Calendar className="text-emerald-600" />} title="Showing Scheduled" detail="Bel Air Estate • Tomorrow at 2:00 PM" time="3h ago" />
+                  <ActivityItem icon={<Users className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'Forest Hill Modern'" time="5m ago" />
+                  <ActivityItem icon={<FileText className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Yorkville Penthouse" time="1h ago" />
+                  <ActivityItem icon={<Calendar className="text-emerald-600" />} title="Showing Scheduled" detail="Bridle Path Manor • Tomorrow at 2:00 PM" time="3h ago" />
                 </div>
               </div>
 
@@ -94,8 +94,8 @@ export default function App() {
               <h3 className="text-xs uppercase tracking-widest text-navy/40 mb-6 font-bold">Property Details</h3>
               <div className="aspect-[4/5] rounded-2xl bg-navy/5 border border-luxury-border mb-6 overflow-hidden relative group">
                 <img 
-                  src={`https://picsum.photos/seed/${activeLead.property.replace(/\s/g, '')}/800/1000`} 
-                  alt="Property" 
+                  src={`https://picsum.photos/seed/${activeLead.property.replace(/\s/g, '')}luxuryhouse/800/1000`} 
+                  alt="Toronto Luxury Property" 
                   className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
