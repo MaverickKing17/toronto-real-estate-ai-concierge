@@ -1,0 +1,5 @@
+{
+  "name": "ARGUS Luxury Dashboard",
+  "description": "A high-end real estate dashboard for ARGUS, featuring lead management, AI-powered chat via OpenRouter, and GCI protection stats.",
+  "requestFramePermissions": []
+}
