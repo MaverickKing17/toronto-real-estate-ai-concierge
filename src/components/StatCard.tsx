@@ -14,19 +14,19 @@ export const StatCard: React.FC<StatCardProps> = ({ title, value, subtitle, icon
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-luxury-gray border border-luxury-border p-6 rounded-2xl relative overflow-hidden group"
+      className="bg-white border border-luxury-border p-6 rounded-2xl relative overflow-hidden group shadow-sm hover:shadow-md transition-all"
     >
-      <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+      <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity text-navy">
         {icon}
       </div>
       
-      <p className="text-xs uppercase tracking-widest text-white/50 mb-2">{title}</p>
-      <h3 className="text-3xl font-light serif text-white mb-1">{value}</h3>
+      <p className="text-[10px] uppercase tracking-widest text-navy/40 mb-2 font-bold">{title}</p>
+      <h3 className="text-3xl font-light serif text-navy mb-1">{value}</h3>
       
       {subtitle && (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gold font-medium">{trend}</span>
-          <span className="text-xs text-white/30">{subtitle}</span>
+          <span className="text-xs text-gold font-bold">{trend}</span>
+          <span className="text-[10px] uppercase tracking-tighter text-navy/30">{subtitle}</span>
         </div>
       )}
       

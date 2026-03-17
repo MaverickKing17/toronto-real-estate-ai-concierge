@@ -111,25 +111,19 @@ export const OnboardingTour: React.FC = () => {
       />
 
       <AnimatePresence mode="wait">
-        <motion.div
+          <motion.div
           key={currentStep}
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className={`absolute pointer-events-auto bg-luxury-gray border border-gold/30 p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] w-[400px] ${
+          className={`absolute pointer-events-auto bg-white border border-luxury-border p-8 rounded-3xl shadow-2xl w-[400px] z-[210] ${
             step.position === 'center' 
               ? 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-              : step.position === 'bottom'
-              ? `top-[${spotlight.top + spotlight.height + 20}px] left-[${spotlight.left}px]`
-              : step.position === 'top'
-              ? `top-[${spotlight.top - 250}px] left-[${spotlight.left - 200}px]`
-              : step.position === 'right'
-              ? `top-[${spotlight.top}px] left-[${spotlight.left + spotlight.width + 20}px]`
-              : `top-[${spotlight.top}px] left-[${spotlight.left - 420}px]`
+              : ''
           }`}
           style={step.position !== 'center' ? {
             top: step.position === 'bottom' ? spotlight.top + spotlight.height + 20 : 
-                 step.position === 'top' ? spotlight.top - 240 : 
+                 step.position === 'top' ? spotlight.top - 260 : 
                  spotlight.top,
             left: step.position === 'right' ? spotlight.left + spotlight.width + 20 :
                   step.position === 'left' ? spotlight.left - 420 :
@@ -143,16 +137,16 @@ export const OnboardingTour: React.FC = () => {
                 {currentStep === 0 ? <ShieldCheck className="text-gold" /> : <Sparkles className="text-gold" size={20} />}
               </div>
               <div>
-                <h3 className="text-xl serif font-bold text-white">{step.title}</h3>
-                <p className="text-[10px] uppercase tracking-widest text-gold font-bold">Step {currentStep + 1} of {TOUR_STEPS.length}</p>
+                <p className="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">Step {currentStep + 1} of {TOUR_STEPS.length}</p>
+                <h3 className="text-xl serif font-bold text-navy">{step.title}</h3>
               </div>
             </div>
-            <button onClick={handleComplete} className="text-white/30 hover:text-white transition-colors">
+            <button onClick={handleComplete} className="text-navy/20 hover:text-navy transition-colors">
               <X size={20} />
             </button>
           </div>
 
-          <p className="text-sm text-white/60 leading-relaxed mb-8">
+          <p className="text-sm text-navy/60 leading-relaxed mb-8">
             {step.content}
           </p>
 
@@ -160,7 +154,7 @@ export const OnboardingTour: React.FC = () => {
             <button 
               onClick={handlePrev}
               disabled={currentStep === 0}
-              className="flex items-center gap-2 text-xs text-white/40 hover:text-white transition-colors disabled:opacity-0"
+              className="flex items-center gap-2 text-xs text-navy/40 hover:text-navy transition-colors disabled:opacity-0"
             >
               <ChevronLeft size={16} />
               Back
@@ -168,13 +162,13 @@ export const OnboardingTour: React.FC = () => {
             
             <div className="flex gap-1">
               {TOUR_STEPS.map((_, i) => (
-                <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentStep ? 'bg-gold w-4' : 'bg-white/10'}`} />
+                <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentStep ? 'bg-gold w-4' : 'bg-navy/10'}`} />
               ))}
             </div>
 
             <button 
               onClick={handleNext}
-              className="flex items-center gap-2 bg-gold text-luxury-black px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-gold-light transition-all shadow-[0_5px_15px_rgba(212,175,55,0.2)]"
+              className="flex items-center gap-2 bg-navy text-white px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-gold transition-all shadow-lg"
             >
               {currentStep === TOUR_STEPS.length - 1 ? 'Finish' : 'Next'}
               <ChevronRight size={16} />

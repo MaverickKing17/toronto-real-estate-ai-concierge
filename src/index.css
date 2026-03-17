@@ -5,16 +5,17 @@
   --font-serif: "Cormorant Garamond", serif;
   --font-sans: "Inter", sans-serif;
   
-  --color-gold: #D4AF37;
-  --color-gold-light: #F1E5AC;
-  --color-luxury-black: #0A0A0A;
-  --color-luxury-gray: #1A1A1A;
-  --color-luxury-border: rgba(255, 255, 255, 0.1);
+  --color-gold: #B45309; /* Richer Gold for better contrast on light */
+  --color-gold-light: #FEF3C7;
+  --color-luxury-black: #FDFCFB; /* Ivory Background */
+  --color-luxury-gray: #FFFFFF; /* Pure White Cards */
+  --color-luxury-border: rgba(0, 0, 0, 0.06); /* Subtle Border */
+  --color-navy: #1E293B; /* Slate 800 for Text and Accents */
 }
 
 body {
   background-color: var(--color-luxury-black);
-  color: white;
+  color: var(--color-navy);
   font-family: var(--font-sans);
 }
 

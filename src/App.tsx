@@ -52,33 +52,33 @@ export default function App() {
 
             {/* Engagement Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8">
+              <div className="bg-white border border-luxury-border rounded-3xl p-8 shadow-sm">
                 <div className="flex justify-between items-center mb-8">
-                  <h3 className="text-xl serif">Recent Activity</h3>
-                  <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors">View All</button>
+                  <h3 className="text-xl serif text-navy">Recent Activity</h3>
+                  <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold">View All</button>
                 </div>
                 <div className="space-y-6">
-                  <ActivityItem icon={<Users className="text-blue-400" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'The Glass House'" time="5m ago" />
+                  <ActivityItem icon={<Users className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'The Glass House'" time="5m ago" />
                   <ActivityItem icon={<FileText className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Penthouse V" time="1h ago" />
-                  <ActivityItem icon={<Calendar className="text-emerald-400" />} title="Showing Scheduled" detail="Bel Air Estate • Tomorrow at 2:00 PM" time="3h ago" />
+                  <ActivityItem icon={<Calendar className="text-emerald-600" />} title="Showing Scheduled" detail="Bel Air Estate • Tomorrow at 2:00 PM" time="3h ago" />
                 </div>
               </div>
 
-              <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 relative overflow-hidden group">
+              <div className="bg-white border border-luxury-border rounded-3xl p-8 relative overflow-hidden group shadow-sm">
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent pointer-events-none" />
-                <h3 className="text-xl serif mb-4">Market Intelligence</h3>
-                <p className="text-sm text-white/50 mb-6 leading-relaxed">
+                <h3 className="text-xl serif mb-4 text-navy">Market Intelligence</h3>
+                <p className="text-sm text-navy/50 mb-6 leading-relaxed">
                   Toronto's luxury market is seeing a 4.2% uptick in off-market transactions this month. 
                   Focus on Bridle Path and Rosedale for maximum GCI protection.
                 </p>
                 <div className="flex gap-4">
-                  <div className="flex-1 p-4 bg-white/5 border border-luxury-border rounded-2xl">
-                    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Hot Zone</p>
+                  <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
+                    <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Hot Zone</p>
                     <p className="text-sm font-bold text-gold">Bridle Path</p>
                   </div>
-                  <div className="flex-1 p-4 bg-white/5 border border-luxury-border rounded-2xl">
-                    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Demand</p>
-                    <p className="text-sm font-bold text-emerald-400">High</p>
+                  <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
+                    <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Demand</p>
+                    <p className="text-sm font-bold text-emerald-600">High</p>
                   </div>
                 </div>
               </div>
@@ -89,30 +89,30 @@ export default function App() {
         return (
           <div className="flex-1 flex overflow-hidden">
             <ChatWindow activeLead={activeLead} />
-            <div className="w-80 border-l border-luxury-border bg-luxury-gray/30 p-8 hidden xl:block overflow-y-auto">
-              <h3 className="text-xs uppercase tracking-widest text-white/40 mb-6">Property Details</h3>
-              <div className="aspect-[4/5] rounded-2xl bg-white/5 border border-luxury-border mb-6 overflow-hidden relative group">
+            <div className="w-80 border-l border-luxury-border bg-white p-8 hidden xl:block overflow-y-auto">
+              <h3 className="text-xs uppercase tracking-widest text-navy/40 mb-6 font-bold">Property Details</h3>
+              <div className="aspect-[4/5] rounded-2xl bg-navy/5 border border-luxury-border mb-6 overflow-hidden relative group">
                 <img 
                   src={`https://picsum.photos/seed/${activeLead.property.replace(/\s/g, '')}/800/1000`} 
                   alt="Property" 
-                  className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-luxury-black to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <p className="text-lg serif font-medium">{activeLead.property}</p>
-                  <p className="text-xs text-gold">{activeLead.value}</p>
+                  <p className="text-lg serif font-medium text-navy">{activeLead.property}</p>
+                  <p className="text-xs text-gold font-bold">{activeLead.value}</p>
                 </div>
               </div>
               <div className="space-y-6">
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest text-white/30 mb-2">Lead Status</p>
+                  <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-2 font-bold">Lead Status</p>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-gold" />
-                    <span className="text-sm font-medium">{activeLead.status}</span>
+                    <span className="text-sm font-medium text-navy">{activeLead.status}</span>
                   </div>
                 </div>
-                <button className="w-full py-3 border border-gold/30 text-gold text-xs uppercase tracking-widest rounded-xl hover:bg-gold/5 transition-colors">
+                <button className="w-full py-3 border border-gold/30 text-gold text-xs uppercase tracking-widest rounded-xl hover:bg-gold/5 transition-colors font-bold">
                   Generate Contract
                 </button>
               </div>
@@ -122,17 +122,17 @@ export default function App() {
       case 'leads':
         return (
           <div className="p-8">
-            <h2 className="text-3xl serif mb-8">Lead Management</h2>
+            <h2 className="text-3xl serif mb-8 text-navy">Lead Management</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {MOCK_LEADS.map(lead => (
-                <div key={lead.id} className="bg-luxury-gray border border-luxury-border p-6 rounded-3xl flex justify-between items-center">
+                <div key={lead.id} className="bg-white border border-luxury-border p-6 rounded-3xl flex justify-between items-center shadow-sm">
                   <div>
-                    <h4 className="text-lg font-medium">{lead.name}</h4>
-                    <p className="text-xs text-white/40">{lead.property}</p>
+                    <h4 className="text-lg font-medium text-navy">{lead.name}</h4>
+                    <p className="text-xs text-navy/40">{lead.property}</p>
                   </div>
                   <button 
                     onClick={() => { setActiveLead(lead); setActiveView('messages'); }}
-                    className="px-4 py-2 bg-gold text-luxury-black text-xs font-bold rounded-xl"
+                    className="px-4 py-2 bg-gold text-navy text-xs font-bold rounded-xl"
                   >
                     View Details
                   </button>
@@ -144,18 +144,18 @@ export default function App() {
       case 'settings':
         return (
           <div className="p-8 max-w-2xl">
-            <h2 className="text-3xl serif mb-8">Account Settings</h2>
+            <h2 className="text-3xl serif mb-8 text-navy">Account Settings</h2>
             <div className="space-y-6">
-              <div className="p-6 bg-luxury-gray border border-luxury-border rounded-3xl">
-                <h4 className="text-sm font-bold mb-4">Profile Information</h4>
+              <div className="p-6 bg-white border border-luxury-border rounded-3xl shadow-sm">
+                <h4 className="text-sm font-bold mb-4 text-navy">Profile Information</h4>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10px] uppercase tracking-widest text-white/30">Full Name</label>
-                    <input type="text" defaultValue="Julian Thorne" className="bg-luxury-black border border-luxury-border rounded-xl p-3 text-sm focus:outline-none focus:border-gold/50" />
+                    <label className="text-[10px] uppercase tracking-widest text-navy/30 font-bold">Full Name</label>
+                    <input type="text" defaultValue="Julian Thorne" className="bg-navy/5 border border-luxury-border rounded-xl p-3 text-sm text-navy focus:outline-none focus:border-gold/50" />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10px] uppercase tracking-widest text-white/30">Email Address</label>
-                    <input type="email" defaultValue="julian@argus-prestige.com" className="bg-luxury-black border border-luxury-border rounded-xl p-3 text-sm focus:outline-none focus:border-gold/50" />
+                    <label className="text-[10px] uppercase tracking-widest text-navy/30 font-bold">Email Address</label>
+                    <input type="email" defaultValue="julian@argus-prestige.com" className="bg-navy/5 border border-luxury-border rounded-xl p-3 text-sm text-navy focus:outline-none focus:border-gold/50" />
                   </div>
                 </div>
               </div>
@@ -168,7 +168,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-luxury-black text-white selection:bg-gold/30">
+    <div className="flex h-screen w-full overflow-hidden bg-luxury-black text-navy selection:bg-gold/30">
       <Sidebar 
         activeLeadId={activeLead.id} 
         onSelectLead={setActiveLead} 
@@ -195,15 +195,15 @@ export default function App() {
 
 const ActivityItem = ({ icon, title, detail, time }: { icon: React.ReactNode, title: string, detail: string, time: string }) => (
   <div className="flex gap-4 items-start group">
-    <div className="w-10 h-10 rounded-xl bg-white/5 border border-luxury-border flex items-center justify-center shrink-0 group-hover:border-gold/30 transition-colors">
+    <div className="w-10 h-10 rounded-xl bg-navy/5 border border-luxury-border flex items-center justify-center shrink-0 group-hover:border-gold/30 transition-colors">
       {icon}
     </div>
     <div className="flex-1 min-w-0">
       <div className="flex justify-between items-start mb-1">
-        <p className="text-sm font-medium text-white/90">{title}</p>
-        <span className="text-[10px] text-white/30 uppercase tracking-tighter">{time}</span>
+        <p className="text-sm font-medium text-navy/90">{title}</p>
+        <span className="text-[10px] text-navy/30 uppercase tracking-tighter font-bold">{time}</span>
       </div>
-      <p className="text-xs text-white/40 truncate">{detail}</p>
+      <p className="text-xs text-navy/40 truncate">{detail}</p>
     </div>
   </div>
 );
