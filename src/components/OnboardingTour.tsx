@@ -63,17 +63,29 @@ export const OnboardingTour: React.FC = () => {
       return;
     }
 
-    const element = document.getElementById(step.targetId);
-    if (element) {
-      const rect = element.getBoundingClientRect();
-      setSpotlight({
-        top: rect.top - 10,
-        left: rect.left - 10,
-        width: rect.width + 20,
-        height: rect.height + 20
-      });
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    const updateSpotlight = () => {
+      const element = document.getElementById(step.targetId);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        setSpotlight({
+          top: rect.top - 10,
+          left: rect.left - 10,
+          width: rect.width + 20,
+          height: rect.height + 20
+        });
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+
+    updateSpotlight();
+    // Re-check after a short delay to account for layout shifts
+    const timer = setTimeout(updateSpotlight, 100);
+    window.addEventListener('resize', updateSpotlight);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateSpotlight);
+    };
   }, [currentStep, isVisible]);
 
   const handleNext = () => {
@@ -99,37 +111,70 @@ export const OnboardingTour: React.FC = () => {
 
   const step = TOUR_STEPS[currentStep];
 
+  // Calculate tooltip position with viewport safety
+  const getTooltipStyle = () => {
+    if (step.position === 'center') {
+      return {
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+      };
+    }
+
+    let top = spotlight.top;
+    let left = spotlight.left;
+
+    if (step.position === 'bottom') {
+      top = spotlight.top + spotlight.height + 20;
+    } else if (step.position === 'top') {
+      top = spotlight.top - 280;
+    } else if (step.position === 'right') {
+      left = spotlight.left + spotlight.width + 20;
+    } else if (step.position === 'left') {
+      left = spotlight.left - 420;
+    }
+
+    // Viewport safety
+    const padding = 20;
+    const tooltipWidth = 400;
+    const tooltipHeight = 250;
+
+    left = Math.max(padding, Math.min(left, window.innerWidth - tooltipWidth - padding));
+    top = Math.max(padding, Math.min(top, window.innerHeight - tooltipHeight - padding));
+
+    return { top, left };
+  };
+
   return (
-    <div className="fixed inset-0 z-[200] pointer-events-none">
+    <div className="fixed inset-0 z-[9999] pointer-events-none">
       {/* Overlay with Spotlight */}
-      <div className="absolute inset-0 bg-black/80 transition-all duration-500 pointer-events-auto" 
-           style={{
-             clipPath: spotlight.width > 0 
-               ? `polygon(0% 0%, 0% 100%, ${spotlight.left}px 100%, ${spotlight.left}px ${spotlight.top}px, ${spotlight.left + spotlight.width}px ${spotlight.top}px, ${spotlight.left + spotlight.width}px ${spotlight.top + spotlight.height}px, ${spotlight.left}px ${spotlight.top + spotlight.height}px, ${spotlight.left}px 100%, 100% 100%, 100% 0%)`
-               : 'none'
-           }} 
+      <div 
+        className="absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-all duration-500 pointer-events-auto cursor-pointer" 
+        onClick={handleComplete}
+        style={{
+          clipPath: spotlight.width > 0 
+            ? `polygon(0% 0%, 0% 100%, ${spotlight.left}px 100%, ${spotlight.left}px ${spotlight.top}px, ${spotlight.left + spotlight.width}px ${spotlight.top}px, ${spotlight.left + spotlight.width}px ${spotlight.top + spotlight.height}px, ${spotlight.left}px ${spotlight.top + spotlight.height}px, ${spotlight.left}px 100%, 100% 100%, 100% 0%)`
+            : 'none'
+        }} 
       />
+
+      {/* Skip Button */}
+      <button 
+        onClick={handleComplete}
+        className="absolute top-8 right-8 pointer-events-auto flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-white text-[10px] uppercase tracking-widest font-bold transition-all backdrop-blur-md"
+      >
+        Skip Tour
+        <X size={14} />
+      </button>
 
       <AnimatePresence mode="wait">
           <motion.div
           key={currentStep}
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className={`absolute pointer-events-auto bg-white border border-luxury-border p-8 rounded-3xl shadow-2xl w-[400px] z-[210] ${
-            step.position === 'center' 
-              ? 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-              : ''
-          }`}
-          style={step.position !== 'center' ? {
-            top: step.position === 'bottom' ? spotlight.top + spotlight.height + 20 : 
-                 step.position === 'top' ? spotlight.top - 260 : 
-                 spotlight.top,
-            left: step.position === 'right' ? spotlight.left + spotlight.width + 20 :
-                  step.position === 'left' ? spotlight.left - 420 :
-                  step.position === 'bottom' ? Math.max(20, spotlight.left) :
-                  spotlight.left
-          } : {}}
+          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+          className="absolute pointer-events-auto bg-white border border-luxury-border p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.25)] w-[400px] z-[10000]"
+          style={getTooltipStyle()}
         >
           <div className="flex justify-between items-start mb-6">
             <div className="flex items-center gap-3">
@@ -141,9 +186,6 @@ export const OnboardingTour: React.FC = () => {
                 <h3 className="text-xl serif font-bold text-navy">{step.title}</h3>
               </div>
             </div>
-            <button onClick={handleComplete} className="text-navy/20 hover:text-navy transition-colors">
-              <X size={20} />
-            </button>
           </div>
 
           <p className="text-sm text-navy/60 leading-relaxed mb-8">
