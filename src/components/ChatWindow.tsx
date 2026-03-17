@@ -22,6 +22,12 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setMessages([
+      { role: 'assistant', content: `Welcome back. I am monitoring the activity for ${activeLead.name}. How shall we proceed with the ${activeLead.property} inquiry?` }
+    ]);
+  }, [activeLead]);
+
+  useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
@@ -44,7 +50,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
           parts: [{ text: m.content }]
         })),
         config: {
-          systemInstruction: SYSTEM_INSTRUCTION
+          systemInstruction: `${SYSTEM_INSTRUCTION}\n\nCURRENT LEAD CONTEXT:\nName: ${activeLead.name}\nProperty: ${activeLead.property}\nValue: ${activeLead.value}\nSummary: ${activeLead.summary}\nKey Insights: ${activeLead.keyInsights.join(', ')}`
         }
       });
 
@@ -86,6 +92,29 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
 
       {/* Messages Area */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-6">
+        {/* Lead Context Summary */}
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          key={`summary-${activeLead.id}`}
+          className="bg-luxury-gray border border-luxury-border rounded-3xl p-6 mb-8 shadow-sm relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 p-4 opacity-10">
+            <ShieldCheck size={48} className="text-gold" />
+          </div>
+          <h3 className="text-[10px] uppercase tracking-[0.2em] text-gold font-black mb-3">Lead Intelligence Summary</h3>
+          <p className="text-sm text-navy/70 leading-relaxed mb-4 italic">
+            "{activeLead.summary}"
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {activeLead.keyInsights.map((insight, idx) => (
+              <span key={idx} className="text-[10px] px-2 py-1 bg-navy/5 border border-navy/10 rounded-full text-navy/60 font-medium">
+                {insight}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
         <AnimatePresence initial={false}>
           {messages.map((msg, i) => (
             <motion.div
