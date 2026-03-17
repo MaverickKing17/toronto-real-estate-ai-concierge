@@ -1,5 +1,3 @@
----
-
 # 🛡️ ARGUS Sales Closer: Elite Real Estate Concierge
 
 **ARGUS** is an AI-driven Sales Intelligence platform engineered for Toronto’s luxury real estate brokerages. By combining the low-latency reasoning of **Gemini 3 Flash** with the multi-model flexibility of **OpenRouter**, ARGUS ensures that high-net-worth leads are qualified and booked for viewings within seconds of their first inquiry.
