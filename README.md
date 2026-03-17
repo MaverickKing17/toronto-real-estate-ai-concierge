@@ -1,7 +1,3 @@
-Since you are building a specialized SaaS for the high-end Toronto market, your README needs to do two things: act as a **technical manual** for the AI and a **sales brochure** for the realtors.
-
-Here is a 2026-ready README structure specifically designed for an AI-native SaaS built in Google AI Studio and deployed on Vercel.
-
 ---
 
 # 🛡️ ARGUS Sales Closer: Elite Real Estate Concierge
