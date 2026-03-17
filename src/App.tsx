@@ -7,9 +7,9 @@ import { Footer } from './components/Footer';
 import { InfoPage } from './components/InfoPage';
 import { LiveChatWidget } from './components/LiveChatWidget';
 import { OnboardingTour } from './components/OnboardingTour';
-import { MOCK_LEADS, Lead } from './constants';
+import { MOCK_LEADS, Lead, MOCK_PROPERTIES, PropertyListing } from './constants';
 import { View } from './types';
-import { ShieldCheck, TrendingUp, Briefcase, Users, Calendar, FileText, Activity } from 'lucide-react';
+import { ShieldCheck, TrendingUp, Briefcase, Users, Calendar, FileText, Activity, Zap, MapPin, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -51,36 +51,107 @@ export default function App() {
               />
             </div>
 
-            {/* Engagement Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm">
-                <div className="flex justify-between items-center mb-8">
-                  <h3 className="text-xl serif text-navy">Recent Activity</h3>
-                  <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold">View All</button>
+            {/* Main Dashboard Content */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Left Column: Activity & Intelligence */}
+              <div className="lg:col-span-2 space-y-8">
+                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm">
+                  <div className="flex justify-between items-center mb-8">
+                    <h3 className="text-xl serif text-navy">Recent Activity</h3>
+                    <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold">View All</button>
+                  </div>
+                  <div className="space-y-6">
+                    <ActivityItem icon={<Users className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'Forest Hill Modern'" time="5m ago" />
+                    <ActivityItem icon={<FileText className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Yorkville Penthouse" time="1h ago" />
+                    <ActivityItem icon={<Calendar className="text-emerald-600" />} title="Showing Scheduled" detail="Bridle Path Manor • Tomorrow at 2:00 PM" time="3h ago" />
+                  </div>
                 </div>
-                <div className="space-y-6">
-                  <ActivityItem icon={<Users className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'Forest Hill Modern'" time="5m ago" />
-                  <ActivityItem icon={<FileText className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Yorkville Penthouse" time="1h ago" />
-                  <ActivityItem icon={<Calendar className="text-emerald-600" />} title="Showing Scheduled" detail="Bridle Path Manor • Tomorrow at 2:00 PM" time="3h ago" />
+
+                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 relative overflow-hidden group shadow-sm">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent pointer-events-none" />
+                  <h3 className="text-xl serif mb-4 text-navy">Market Intelligence</h3>
+                  <p className="text-sm text-navy/50 mb-6 leading-relaxed">
+                    Toronto's luxury market is seeing a 4.2% uptick in off-market transactions this month. 
+                    Focus on Bridle Path and Rosedale for maximum GCI protection.
+                  </p>
+                  <div className="flex gap-4">
+                    <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
+                      <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Hot Zone</p>
+                      <p className="text-sm font-bold text-gold">Bridle Path</p>
+                    </div>
+                    <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
+                      <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Demand</p>
+                      <p className="text-sm font-bold text-emerald-600">High</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Deal Risk Monitor */}
+                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm">
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck size={20} className="text-emerald-500" />
+                      <h3 className="text-lg serif text-navy">GCI Protection Alerts</h3>
+                    </div>
+                    <span className="text-[10px] text-navy/30 font-bold uppercase tracking-widest">2 Active Risks</span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-red-500/5 border border-red-500/20 rounded-2xl">
+                      <p className="text-[10px] uppercase tracking-widest text-red-500 font-black mb-1">High Risk</p>
+                      <p className="text-sm font-bold text-navy mb-1">Yorkville Penthouse</p>
+                      <p className="text-xs text-navy/50">Buyer financing contingency expiring in 24h. Recommend immediate follow-up.</p>
+                    </div>
+                    <div className="p-4 bg-amber-500/5 border border-amber-500/20 rounded-2xl">
+                      <p className="text-[10px] uppercase tracking-widest text-amber-500 font-black mb-1">Medium Risk</p>
+                      <p className="text-sm font-bold text-navy mb-1">Forest Hill Modern</p>
+                      <p className="text-xs text-navy/50">Inspection report delayed. Potential impact on closing date.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 relative overflow-hidden group shadow-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent pointer-events-none" />
-                <h3 className="text-xl serif mb-4 text-navy">Market Intelligence</h3>
-                <p className="text-sm text-navy/50 mb-6 leading-relaxed">
-                  Toronto's luxury market is seeing a 4.2% uptick in off-market transactions this month. 
-                  Focus on Bridle Path and Rosedale for maximum GCI protection.
-                </p>
-                <div className="flex gap-4">
-                  <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
-                    <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Hot Zone</p>
-                    <p className="text-sm font-bold text-gold">Bridle Path</p>
+              {/* Right Column: Real-time Property Feed */}
+              <div className="space-y-8">
+                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm flex flex-col h-full">
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="flex items-center gap-2">
+                      <Zap size={18} className="text-gold" />
+                      <h3 className="text-lg serif text-navy">Shadow Market</h3>
+                    </div>
+                    <span className="text-[8px] bg-gold/10 text-gold px-2 py-0.5 rounded-full font-bold uppercase tracking-widest">Live Feed</span>
                   </div>
-                  <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
-                    <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Demand</p>
-                    <p className="text-sm font-bold text-emerald-600">High</p>
+                  
+                  <div className="space-y-4 flex-1">
+                    {MOCK_PROPERTIES.map((prop) => (
+                      <div key={prop.id} className="p-4 bg-white/5 border border-luxury-border rounded-2xl hover:border-gold/30 transition-all cursor-pointer group">
+                        <div className="flex justify-between items-start mb-2">
+                          <span className={`text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded ${
+                            prop.type === 'Off-Market' ? 'bg-navy text-gold' : 
+                            prop.type === 'New Listing' ? 'bg-emerald-500/10 text-emerald-600' : 
+                            'bg-blue-500/10 text-blue-600'
+                          }`}>
+                            {prop.type}
+                          </span>
+                          <div className="flex items-center gap-1 text-[9px] text-navy/30 font-bold">
+                            <Clock size={10} />
+                            {prop.timestamp}
+                          </div>
+                        </div>
+                        <p className="text-sm font-bold text-navy group-hover:text-gold transition-colors">{prop.address}</p>
+                        <div className="flex justify-between items-center mt-2">
+                          <div className="flex items-center gap-1 text-[10px] text-navy/40">
+                            <MapPin size={10} />
+                            {prop.neighborhood}
+                          </div>
+                          <p className="text-xs font-black text-navy">{prop.price}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
+                  
+                  <button className="w-full mt-6 py-3 bg-navy text-white text-[10px] uppercase tracking-[0.2em] font-black rounded-xl hover:bg-navy/90 transition-all shadow-lg">
+                    Access Full Inventory
+                  </button>
                 </div>
               </div>
             </div>

@@ -58,3 +58,19 @@ export const MOCK_LEADS: Lead[] = [
     keyInsights: ['Family-oriented', 'Privacy-first', 'Repeat client']
   },
 ];
+
+export interface PropertyListing {
+  id: string;
+  address: string;
+  neighborhood: string;
+  price: string;
+  type: 'Off-Market' | 'New Listing' | 'Price Adjustment';
+  timestamp: string;
+}
+
+export const MOCK_PROPERTIES: PropertyListing[] = [
+  { id: 'p1', address: '21 High Point Rd', neighborhood: 'Bridle Path', price: '$32,800,000', type: 'Off-Market', timestamp: 'Just Now' },
+  { id: 'p2', address: 'Penthouse 4, 1 Bloor St W', neighborhood: 'Yorkville', price: '$18,500,000', type: 'New Listing', timestamp: '14m ago' },
+  { id: 'p3', address: '88 Dunvegan Rd', neighborhood: 'Forest Hill', price: '$14,200,000', type: 'Price Adjustment', timestamp: '1h ago' },
+  { id: 'p4', address: '12 Rosedale Rd', neighborhood: 'Rosedale', price: '$9,800,000', type: 'New Listing', timestamp: '3h ago' },
+];
