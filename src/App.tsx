@@ -9,7 +9,7 @@ import { LiveChatWidget } from './components/LiveChatWidget';
 import { OnboardingTour } from './components/OnboardingTour';
 import { MOCK_LEADS, Lead, MOCK_PROPERTIES, PropertyListing } from './constants';
 import { View } from './types';
-import { ShieldCheck, TrendingUp, Briefcase, Users, Calendar, FileText, Activity, Zap, MapPin, Clock, Coffee, ShoppingBag, Waves } from 'lucide-react';
+import { ShieldCheck, TrendingUp, Briefcase, Users, Calendar, FileText, Activity, Zap, MapPin, Clock, Coffee, ShoppingBag, Waves, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -88,6 +88,7 @@ export default function App() {
                     <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold border-b border-gold/20 pb-1">View Full Audit</button>
                   </div>
                   <div className="relative space-y-8 before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-luxury-border">
+                    <ActivityItem icon={<Phone size={18} className="text-red-500" />} title="Missed Call" detail="Alexander Vanderbilt (Bridle Path Manor)" time="2m ago" />
                     <ActivityItem icon={<Users size={18} className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'Forest Hill Modern'" time="5m ago" />
                     <ActivityItem icon={<FileText size={18} className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Yorkville Penthouse" time="1h ago" />
                     <ActivityItem icon={<Calendar size={18} className="text-emerald-600" />} title="Showing Scheduled" detail="Bridle Path Manor • Tomorrow at 2:00 PM" time="3h ago" />
@@ -165,7 +166,17 @@ export default function App() {
                     </div>
                     <span className="text-[10px] text-navy/30 font-bold uppercase tracking-widest">2 Active Risks</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-4 bg-red-500/5 border border-red-500/20 rounded-2xl flex flex-col justify-between">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-widest text-red-500 font-black mb-1">Critical Alert</p>
+                        <p className="text-sm font-bold text-navy mb-1">Missed Call: Alexander Vanderbilt</p>
+                        <p className="text-xs text-navy/50 mb-3">High-value lead for Bridle Path Manor. Auto-response sent, but manual follow-up required.</p>
+                      </div>
+                      <button className="w-full py-2 bg-red-500 text-white text-[10px] uppercase tracking-widest font-black rounded-lg hover:bg-red-600 transition-colors">
+                        Text Back Now
+                      </button>
+                    </div>
                     <div className="p-4 bg-red-500/5 border border-red-500/20 rounded-2xl">
                       <p className="text-[10px] uppercase tracking-widest text-red-500 font-black mb-1">High Risk</p>
                       <p className="text-sm font-bold text-navy mb-1">Yorkville Penthouse</p>
@@ -311,9 +322,9 @@ export default function App() {
                   </div>
                   
                   <div className="mt-8 pt-6 border-t border-luxury-border">
-                    <button className="w-full py-4 bg-navy text-white text-[10px] uppercase tracking-[0.3em] font-black rounded-xl hover:bg-navy/90 hover:shadow-2xl hover:shadow-navy/20 transition-all relative overflow-hidden group">
+                    <button className="w-full py-4 bg-gold text-luxury-black text-[10px] uppercase tracking-[0.3em] font-black rounded-xl hover:bg-gold-light hover:shadow-2xl hover:shadow-gold/20 transition-all relative overflow-hidden group">
                       <span className="relative z-10">Access Full Inventory</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                     </button>
                     <p className="text-[8px] text-center text-navy/30 mt-4 uppercase tracking-widest font-bold">Updated real-time from ARGUS Verified Network</p>
                   </div>
