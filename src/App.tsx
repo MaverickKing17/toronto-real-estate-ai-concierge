@@ -153,46 +153,87 @@ export default function App() {
 
               {/* Right Column: Real-time Property Feed */}
               <div className="space-y-8">
-                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm flex flex-col h-full">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                      <Zap size={18} className="text-gold" />
-                      <h3 className="text-lg serif text-navy">Shadow Market</h3>
+                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm flex flex-col h-full relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
+                  
+                  <div className="flex justify-between items-center mb-8">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center text-gold">
+                        <Zap size={20} />
+                      </div>
+                      <div className="space-y-0.5">
+                        <h3 className="text-lg serif text-navy">Shadow Market</h3>
+                        <p className="text-[10px] text-navy/40 font-bold uppercase tracking-widest">Off-Market Intelligence</p>
+                      </div>
                     </div>
-                    <span className="text-[8px] bg-gold/10 text-gold px-2 py-0.5 rounded-full font-bold uppercase tracking-widest">Live Feed</span>
+                    <div className="flex flex-col items-end">
+                      <span className="text-[8px] bg-gold text-white px-2 py-0.5 rounded-full font-black uppercase tracking-[0.2em] mb-1">Live Feed</span>
+                      <p className="text-[8px] text-emerald-500 font-bold">4 New Updates</p>
+                    </div>
                   </div>
                   
-                  <div className="space-y-4 flex-1">
+                  <div className="space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar max-h-[600px]">
                     {MOCK_PROPERTIES.map((prop) => (
-                      <div key={prop.id} className="p-4 bg-white/5 border border-luxury-border rounded-2xl hover:border-gold/30 transition-all cursor-pointer group">
-                        <div className="flex justify-between items-start mb-2">
-                          <span className={`text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded ${
-                            prop.type === 'Off-Market' ? 'bg-navy text-gold' : 
-                            prop.type === 'New Listing' ? 'bg-emerald-500/10 text-emerald-600' : 
-                            'bg-blue-500/10 text-blue-600'
+                      <motion.div 
+                        key={prop.id} 
+                        whileHover={{ x: 4, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                        className="p-5 bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl hover:border-gold/40 hover:shadow-2xl hover:shadow-gold/10 transition-all cursor-pointer group relative overflow-hidden"
+                      >
+                        <div className="absolute top-0 left-0 w-1 h-full bg-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+                        
+                        <div className="flex justify-between items-start mb-3">
+                          <span className={`text-[8px] uppercase tracking-[0.15em] font-black px-2 py-1 rounded-md ${
+                            prop.type === 'Off-Market' ? 'bg-gold text-navy' : 
+                            prop.type === 'New Listing' ? 'bg-emerald-500 text-white' : 
+                            'bg-blue-500 text-white'
                           }`}>
                             {prop.type}
                           </span>
-                          <div className="flex items-center gap-1 text-[9px] text-navy/30 font-bold">
+                          <div className="flex items-center gap-1.5 text-[9px] text-navy/40 font-black uppercase tracking-tighter">
                             <Clock size={10} />
                             {prop.timestamp}
                           </div>
                         </div>
-                        <p className="text-sm font-bold text-navy group-hover:text-gold transition-colors">{prop.address}</p>
-                        <div className="flex justify-between items-center mt-2">
-                          <div className="flex items-center gap-1 text-[10px] text-navy/40">
-                            <MapPin size={10} />
+                        
+                        <div className="space-y-1 mb-4">
+                          <p className="text-sm font-black text-navy group-hover:text-gold transition-colors leading-tight">{prop.address}</p>
+                          <div className="flex items-center gap-1.5 text-[10px] text-navy/50 font-medium">
+                            <MapPin size={10} className="text-gold" />
                             {prop.neighborhood}
                           </div>
-                          <p className="text-xs font-black text-navy">{prop.price}</p>
                         </div>
-                      </div>
+
+                        <div className="flex justify-between items-end pt-3 border-t border-white/5">
+                          <div className="space-y-0.5">
+                            <p className="text-[8px] uppercase tracking-widest text-navy/30 font-bold">Asking Price</p>
+                            <p className="text-sm font-black text-navy">{prop.price}</p>
+                          </div>
+                          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-navy/30 group-hover:bg-gold group-hover:text-navy transition-all">
+                            <Zap size={14} />
+                          </div>
+                        </div>
+                      </motion.div>
                     ))}
+
+                    {/* Visual Filler / Teaser */}
+                    <div className="p-8 border-2 border-dashed border-luxury-border rounded-2xl flex flex-col items-center justify-center text-center space-y-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-pointer group">
+                      <div className="w-12 h-12 rounded-full bg-navy/5 flex items-center justify-center text-navy/20 group-hover:text-gold transition-colors">
+                        <Users size={24} />
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs font-bold text-navy">Exclusive Network Only</p>
+                        <p className="text-[10px] text-navy/40 leading-relaxed">3 Private mandates are currently hidden. Verify your credentials to view.</p>
+                      </div>
+                    </div>
                   </div>
                   
-                  <button className="w-full mt-6 py-3 bg-navy text-white text-[10px] uppercase tracking-[0.2em] font-black rounded-xl hover:bg-navy/90 transition-all shadow-lg">
-                    Access Full Inventory
-                  </button>
+                  <div className="mt-8 pt-6 border-t border-luxury-border">
+                    <button className="w-full py-4 bg-navy text-white text-[10px] uppercase tracking-[0.3em] font-black rounded-xl hover:bg-navy/90 hover:shadow-2xl hover:shadow-navy/20 transition-all relative overflow-hidden group">
+                      <span className="relative z-10">Access Full Inventory</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    </button>
+                    <p className="text-[8px] text-center text-navy/30 mt-4 uppercase tracking-widest font-bold">Updated real-time from ARGUS Verified Network</p>
+                  </div>
                 </div>
               </div>
             </div>
