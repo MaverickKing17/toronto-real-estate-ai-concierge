@@ -161,10 +161,10 @@ export const OnboardingTour: React.FC = () => {
       {/* Skip Button */}
       <button 
         onClick={handleComplete}
-        className="absolute top-8 right-8 pointer-events-auto flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-white text-[10px] uppercase tracking-widest font-bold transition-all backdrop-blur-md"
+        className="absolute top-8 right-8 pointer-events-auto flex items-center gap-2 px-6 py-3 bg-navy border-2 border-gold rounded-full text-white text-xs uppercase tracking-[0.2em] font-black transition-all shadow-[0_0_30px_rgba(180,83,9,0.3)] hover:scale-105 active:scale-95"
       >
         Skip Tour
-        <X size={14} />
+        <X size={16} strokeWidth={3} />
       </button>
 
       <AnimatePresence mode="wait">
@@ -173,47 +173,47 @@ export const OnboardingTour: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
-          className="absolute pointer-events-auto bg-white border border-luxury-border p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.25)] w-[400px] z-[10000]"
+          className="absolute pointer-events-auto bg-white border-2 border-gold/50 p-10 rounded-[2rem] shadow-[0_40px_80px_rgba(0,0,0,0.4)] w-[440px] z-[10000]"
           style={getTooltipStyle()}
         >
-          <div className="flex justify-between items-start mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center">
-                {currentStep === 0 ? <ShieldCheck className="text-gold" /> : <Sparkles className="text-gold" size={20} />}
+          <div className="flex justify-between items-start mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-gold/10 border-2 border-gold/30 flex items-center justify-center shrink-0">
+                {currentStep === 0 ? <ShieldCheck className="text-gold w-6 h-6" /> : <Sparkles className="text-gold w-6 h-6" />}
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">Step {currentStep + 1} of {TOUR_STEPS.length}</p>
-                <h3 className="text-xl serif font-bold text-navy">{step.title}</h3>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-gold font-black mb-1">Step {currentStep + 1} of {TOUR_STEPS.length}</p>
+                <h3 className="text-2xl serif font-bold text-navy leading-tight">{step.title}</h3>
               </div>
             </div>
           </div>
 
-          <p className="text-sm text-navy/60 leading-relaxed mb-8">
+          <p className="text-base text-navy/70 leading-relaxed mb-10 font-medium">
             {step.content}
           </p>
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center pt-6 border-t border-luxury-border">
             <button 
               onClick={handlePrev}
               disabled={currentStep === 0}
-              className="flex items-center gap-2 text-xs text-navy/40 hover:text-navy transition-colors disabled:opacity-0"
+              className="flex items-center gap-2 text-sm font-bold text-navy/40 hover:text-navy transition-colors disabled:opacity-0"
             >
-              <ChevronLeft size={16} />
+              <ChevronLeft size={18} />
               Back
             </button>
             
-            <div className="flex gap-1">
+            <div className="flex gap-2">
               {TOUR_STEPS.map((_, i) => (
-                <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentStep ? 'bg-gold w-4' : 'bg-navy/10'}`} />
+                <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === currentStep ? 'bg-gold w-8' : 'bg-navy/10 w-1.5'}`} />
               ))}
             </div>
 
             <button 
               onClick={handleNext}
-              className="flex items-center gap-2 bg-navy text-white px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-gold transition-all shadow-lg"
+              className="flex items-center gap-3 bg-navy text-white px-8 py-3.5 rounded-2xl text-sm font-black hover:bg-gold transition-all shadow-xl hover:shadow-gold/20"
             >
               {currentStep === TOUR_STEPS.length - 1 ? 'Finish' : 'Next'}
-              <ChevronRight size={16} />
+              <ChevronRight size={18} />
             </button>
           </div>
         </motion.div>
