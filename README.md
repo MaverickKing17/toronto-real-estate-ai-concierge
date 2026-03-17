@@ -71,4 +71,3 @@ Designed for seamless deployment via **Vercel**.
 * **Toronto Context:** Added specific neighborhood references (Yorkville, Bridle Path) to the "Asset Class" section to make it feel more "Toronto-local."
 * **Secure Config:** Added the `.env.local` block so other developers (or your future self) know exactly how to hook up the OpenRouter key you just created.
 
-**Would you like me to create a similar README for Bastion Audit that focuses more on "Security Protocols" and "Prompt Injection Protection"?**
