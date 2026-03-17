@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { ChatWindow } from './components/ChatWindow';
 import { StatCard } from './components/StatCard';
@@ -9,12 +9,34 @@ import { LiveChatWidget } from './components/LiveChatWidget';
 import { OnboardingTour } from './components/OnboardingTour';
 import { MOCK_LEADS, Lead, MOCK_PROPERTIES, PropertyListing } from './constants';
 import { View } from './types';
-import { ShieldCheck, TrendingUp, Briefcase, Users, Calendar, FileText, Activity, Zap, MapPin, Clock } from 'lucide-react';
+import { ShieldCheck, TrendingUp, Briefcase, Users, Calendar, FileText, Activity, Zap, MapPin, Clock, Coffee, ShoppingBag, Waves } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
+
+// Fix Leaflet icon issue
+const customIcon = new L.Icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+function MapUpdater({ center }: { center: [number, number] }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, 14);
+  }, [center, map]);
+  return null;
+}
 
 export default function App() {
   const [activeLead, setActiveLead] = useState<Lead>(MOCK_LEADS[0]);
   const [activeView, setActiveView] = useState<View>('dashboard');
+  const [selectedProperty, setSelectedProperty] = useState<PropertyListing>(MOCK_PROPERTIES[0]);
 
   const renderView = () => {
     switch (activeView) {
@@ -93,36 +115,43 @@ export default function App() {
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="p-6 bg-white/40 backdrop-blur-sm border border-luxury-border rounded-2xl group hover:border-gold/30 transition-all">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center text-gold">
-                          <MapPin size={16} />
+                    {/* Primary Hot Zone - Gold Theme */}
+                    <div className="p-6 bg-luxury-gray border border-gold/30 rounded-2xl group hover:border-gold/60 hover:shadow-2xl hover:shadow-gold/10 transition-all duration-500 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-gold/20 transition-colors" />
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-10 h-10 rounded-xl bg-gold/20 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+                          <MapPin size={20} />
                         </div>
-                        <p className="text-[10px] uppercase tracking-widest text-navy/40 font-bold">Primary Hot Zone</p>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-gold font-black">Primary Hot Zone</p>
                       </div>
-                      <p className="text-xl font-bold text-navy mb-1">Bridle Path</p>
-                      <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest">+12% Velocity Increase</p>
+                      <p className="text-2xl serif text-navy mb-2">Bridle Path</p>
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                        <p className="text-[10px] text-gold font-black uppercase tracking-widest">+12% Velocity Increase</p>
+                      </div>
                     </div>
 
-                    <div className="p-6 bg-white/40 backdrop-blur-sm border border-luxury-border rounded-2xl group hover:border-gold/30 transition-all">
-                      <div className="flex items-center justify-between mb-4">
+                    {/* Market Demand - Royal Blue Theme for Contrast */}
+                    <div className="p-6 bg-luxury-gray border border-royal/30 rounded-2xl group hover:border-royal/60 hover:shadow-2xl hover:shadow-royal/10 transition-all duration-500 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-royal/10 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-royal/20 transition-colors" />
+                      <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600">
-                            <TrendingUp size={16} />
+                          <div className="w-10 h-10 rounded-xl bg-royal/20 flex items-center justify-center text-royal group-hover:scale-110 transition-transform">
+                            <TrendingUp size={20} />
                           </div>
-                          <p className="text-[10px] uppercase tracking-widest text-navy/40 font-bold">Market Demand</p>
+                          <p className="text-[10px] uppercase tracking-[0.2em] text-royal font-black">Market Demand</p>
                         </div>
-                        <span className="text-xs font-black text-emerald-600">92%</span>
+                        <span className="text-sm font-black text-royal">92%</span>
                       </div>
-                      <div className="h-2 w-full bg-navy/5 rounded-full overflow-hidden mb-3">
+                      <div className="h-1.5 w-full bg-royal/10 rounded-full overflow-hidden mb-4">
                         <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: '92%' }}
-                          transition={{ duration: 1.5, ease: "easeOut" }}
-                          className="h-full bg-emerald-500"
+                          transition={{ duration: 2, ease: "circOut" }}
+                          className="h-full bg-gradient-to-r from-royal to-blue-400"
                         />
                       </div>
-                      <p className="text-[10px] text-navy/40 font-medium">Elevated buyer competition in $15M+ tier</p>
+                      <p className="text-[10px] text-navy/60 font-bold leading-relaxed">Elevated buyer competition in <span className="text-royal">$15M+ tier</span></p>
                     </div>
                   </div>
                 </div>
@@ -172,14 +201,68 @@ export default function App() {
                     </div>
                   </div>
                   
-                  <div className="space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar max-h-[600px]">
+                  {/* Interactive Map Integration */}
+                  <div className="mb-8 rounded-2xl overflow-hidden border border-luxury-border h-[300px] relative">
+                    <MapContainer 
+                      center={selectedProperty.coordinates} 
+                      zoom={14} 
+                      style={{ height: '100%', width: '100%' }}
+                      zoomControl={false}
+                    >
+                      <TileLayer
+                        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                      />
+                      <Marker position={selectedProperty.coordinates} icon={customIcon}>
+                        <Popup className="luxury-popup">
+                          <div className="p-2">
+                            <p className="text-sm font-bold text-navy mb-1">{selectedProperty.address}</p>
+                            <p className="text-xs text-gold mb-2">{selectedProperty.price}</p>
+                            <div className="flex flex-wrap gap-2">
+                              {selectedProperty.amenities.map((amenity, idx) => (
+                                <span key={idx} className="text-[8px] bg-navy/10 px-1.5 py-0.5 rounded-full text-navy/60">
+                                  {amenity}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </Popup>
+                      </Marker>
+                      <MapUpdater center={selectedProperty.coordinates} />
+                    </MapContainer>
+                    
+                    {/* Map Overlay: Nearby Amenities */}
+                    <div className="absolute bottom-4 left-4 right-4 flex gap-2 z-[1000]">
+                      <div className="px-3 py-1.5 bg-luxury-gray/80 backdrop-blur-md border border-luxury-border rounded-full flex items-center gap-2 text-[9px] font-bold text-navy">
+                        <Coffee size={12} className="text-gold" />
+                        <span>Elite Clubs</span>
+                      </div>
+                      <div className="px-3 py-1.5 bg-luxury-gray/80 backdrop-blur-md border border-luxury-border rounded-full flex items-center gap-2 text-[9px] font-bold text-navy">
+                        <ShoppingBag size={12} className="text-gold" />
+                        <span>Luxury Retail</span>
+                      </div>
+                      <div className="px-3 py-1.5 bg-luxury-gray/80 backdrop-blur-md border border-luxury-border rounded-full flex items-center gap-2 text-[9px] font-bold text-navy">
+                        <Waves size={12} className="text-gold" />
+                        <span>Private Spas</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar max-h-[400px]">
                     {MOCK_PROPERTIES.map((prop) => (
                       <motion.div 
                         key={prop.id} 
+                        onClick={() => setSelectedProperty(prop)}
                         whileHover={{ x: 4, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-                        className="p-5 bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl hover:border-gold/40 hover:shadow-2xl hover:shadow-gold/10 transition-all cursor-pointer group relative overflow-hidden"
+                        className={`p-5 border rounded-2xl transition-all cursor-pointer group relative overflow-hidden ${
+                          selectedProperty.id === prop.id 
+                            ? 'bg-white/10 border-gold shadow-lg shadow-gold/10' 
+                            : 'bg-white/[0.03] border-white/10'
+                        }`}
                       >
-                        <div className="absolute top-0 left-0 w-1 h-full bg-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className={`absolute top-0 left-0 w-1 h-full bg-gold transition-opacity ${
+                          selectedProperty.id === prop.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                        }`} />
                         
                         <div className="flex justify-between items-start mb-3">
                           <span className={`text-[8px] uppercase tracking-[0.15em] font-black px-2 py-1 rounded-md ${

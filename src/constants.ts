@@ -66,11 +66,49 @@ export interface PropertyListing {
   price: string;
   type: 'Off-Market' | 'New Listing' | 'Price Adjustment';
   timestamp: string;
+  coordinates: [number, number]; // [lat, lng]
+  amenities: string[];
 }
 
 export const MOCK_PROPERTIES: PropertyListing[] = [
-  { id: 'p1', address: '21 High Point Rd', neighborhood: 'Bridle Path', price: '$32,800,000', type: 'Off-Market', timestamp: 'Just Now' },
-  { id: 'p2', address: 'Penthouse 4, 1 Bloor St W', neighborhood: 'Yorkville', price: '$18,500,000', type: 'New Listing', timestamp: '14m ago' },
-  { id: 'p3', address: '88 Dunvegan Rd', neighborhood: 'Forest Hill', price: '$14,200,000', type: 'Price Adjustment', timestamp: '1h ago' },
-  { id: 'p4', address: '12 Rosedale Rd', neighborhood: 'Rosedale', price: '$9,800,000', type: 'New Listing', timestamp: '3h ago' },
+  { 
+    id: 'p1', 
+    address: '21 High Point Rd', 
+    neighborhood: 'Bridle Path', 
+    price: '$32,800,000', 
+    type: 'Off-Market', 
+    timestamp: 'Just Now',
+    coordinates: [43.7333, -79.3733],
+    amenities: ['Private Helipad', '12-Car Gallery', 'Wine Vault']
+  },
+  { 
+    id: 'p2', 
+    address: 'Penthouse 4, 1 Bloor St W', 
+    neighborhood: 'Yorkville', 
+    price: '$18,500,000', 
+    type: 'New Listing', 
+    timestamp: '14m ago',
+    coordinates: [43.6702, -79.3868],
+    amenities: ['360° Skyline View', 'Private Elevator', '24/7 Concierge']
+  },
+  { 
+    id: 'p3', 
+    address: '88 Dunvegan Rd', 
+    neighborhood: 'Forest Hill', 
+    price: '$14,200,000', 
+    type: 'Price Adjustment', 
+    timestamp: '1h ago',
+    coordinates: [43.6917, -79.4056],
+    amenities: ['Heated Infinity Pool', 'Smart Home OS', 'Chef\'s Kitchen']
+  },
+  { 
+    id: 'p4', 
+    address: '12 Rosedale Rd', 
+    neighborhood: 'Rosedale', 
+    price: '$9,800,000', 
+    type: 'New Listing', 
+    timestamp: '3h ago',
+    coordinates: [43.6775, -79.3811],
+    amenities: ['Heritage Architecture', 'Private Garden', 'Library']
+  },
 ];
