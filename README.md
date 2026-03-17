@@ -1,20 +1,10 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+🛡️ ARGUS Sales Closer: Elite Real Estate IntelligenceARGUS Sales Closer is an AI-driven Sales Concierge and Lead Intelligence platform engineered for high-volume, luxury real estate brokerages in the Toronto GTA. Designed to protect and scale Gross Commission Income (GCI), ARGUS provides real-time oversight of lead interactions, sentiment analysis, and instant qualification for the "1%" market.🧠 Lead Intelligence CoreThe interaction matrix provides a live "Pulse" of all active conversations, specifically tuned for the Toronto luxury landscape:Asset Class Sorting: Intelligent categorization for Penthouses (Yorkville), Detached (Bridle Path), Commercial, and Luxury Condos.Real-Time Sentiment: Visual indicators (HOT / WARM / NEUTRAL / COLD) based on intercepted message intent.Temporal Tracking: Precise timing of the last interaction to ensure high-net-worth leads never go cold.🛡️ GCI Protection SuiteLive AI Oversight: Real-time monitoring of AI-handled conversations across your entire territory.Response Latency: Sub-10s benchmark tracking. Currently operating at an instant 6.3s average to ensure elite-level service.GCI Guard: Track your projected and protected commission volume directly from the main dashboard.🎯 Elite Profiling & QualificationAsset Parameters: Instant access to contact details and specific property interests.Qualification Index: A proprietary percentage-based score (e.g., 88% Qualified) to help agents prioritize their highest-value appointments.🛠️ Tech Stack (2026 Architecture)Orchestration: Voiceflow / AI Agent LogicIntelligence: OpenRouter API (Routing to google/gemini-2.0-flash for sub-second latency)Frontend: Next.js 15+ (Tailored for Vercel edge deployment)Design Language: "Warm Modern" / Indiana Limestone aesthetic with high-accessibility UI.📈 Performance BenchmarksMetricIndustry BenchmarkARGUS PerformanceResponse Time< 10.0s6.3sGCI ProtectedVariable$1.4M+Lead SentimentManualAutomated Real-Time🚀 Getting Started1. Clone the RepositoryBashgit clone https://github.com/your-username/argus-sales-closer-elite.git
+2. Environment SetupCreate a .env.local file in the root directory and add your keys. Note: We use OpenRouter to ensure 100% uptime and model flexibility.Bash# OpenRouter API Key (sk-or-v1-...)
+OPENROUTER_API_KEY=your_openrouter_key_here
 
-# Run and deploy your AI Studio app
+# Site URL for OpenRouter Rankings (Optional)
+NEXT_PUBLIC_SITE_URL=https://your-argus-demo.vercel.app
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/6ef999f0-8e67-4ae8-a6a7-89d807ea84fe
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# Voiceflow Integration
+VOICEFLOW_API_KEY=your_voiceflow_key_here
+3. DeploymentDesigned for seamless deployment via Vercel.Push your code to GitHub.Import the project into Vercel.Add the Environment Variables from your .env.local to the Vercel Dashboard.
