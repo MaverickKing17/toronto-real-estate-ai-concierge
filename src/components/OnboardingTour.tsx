@@ -12,32 +12,32 @@ interface TourStep {
 const TOUR_STEPS: TourStep[] = [
   {
     targetId: 'center',
-    title: 'Welcome to ARGUS',
-    content: 'Experience the next generation of luxury real estate management. Let us show you around your new command center.',
+    title: 'Your Digital Headquarters',
+    content: 'Welcome to ARGUS. We’ve automated the administrative burden of luxury real estate so you can focus on what matters: closing high-value mandates. Shall we begin your tour?',
     position: 'center'
   },
   {
     targetId: 'tour-stats',
     title: 'GCI Protection',
-    content: 'Monitor your Gross Commission Income in real-time. Our high-precision tracking ensures your revenue is always protected.',
+    content: 'Your revenue is your reputation. Monitor your Gross Commission Income with surgical precision. Hover over these cards to reveal underlying growth trends and pipeline health.',
     position: 'bottom'
   },
   {
     targetId: 'tour-leads',
-    title: 'Lead Management',
-    content: 'Access your elite client list instantly. Track activity, property interests, and transaction values at a glance.',
+    title: 'Elite Lead Pipeline',
+    content: 'High-net-worth clients expect immediate attention. Your sidebar prioritizes leads by transaction value. Select any lead to instantly review their property interests and activity history.',
     position: 'right'
   },
   {
     targetId: 'tour-chat',
-    title: 'AI Intelligence',
-    content: 'Engage with leads using ARGUS AI. Our sophisticated models handle complex inquiries while maintaining your brand prestige.',
+    title: 'AI Broker Intelligence',
+    content: 'Maintain your brand prestige at scale. ARGUS AI handles complex inquiries with the tone of a seasoned broker. Try instructing the AI to "Draft a follow-up for the Penthouse inquiry."',
     position: 'left'
   },
   {
     targetId: 'tour-concierge',
-    title: '24/7 Concierge',
-    content: 'Your personal AI assistant is always ready to provide market intelligence and administrative support.',
+    title: 'Strategic Edge',
+    content: 'Your personal market analyst is always active. Click the concierge bubble anytime to request real-time Toronto market intelligence or to generate contracts on the fly.',
     position: 'top'
   }
 ];
