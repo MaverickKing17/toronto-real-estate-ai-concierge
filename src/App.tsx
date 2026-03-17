@@ -55,33 +55,74 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Left Column: Activity & Intelligence */}
               <div className="lg:col-span-2 space-y-8">
-                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm">
-                  <div className="flex justify-between items-center mb-8">
-                    <h3 className="text-xl serif text-navy">Recent Activity</h3>
-                    <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold">View All</button>
+                <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm relative overflow-hidden">
+                  <div className="flex justify-between items-center mb-10">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center text-gold">
+                        <Activity size={20} />
+                      </div>
+                      <h3 className="text-xl serif text-navy">Recent Activity</h3>
+                    </div>
+                    <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold border-b border-gold/20 pb-1">View Full Audit</button>
                   </div>
-                  <div className="space-y-6">
-                    <ActivityItem icon={<Users className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'Forest Hill Modern'" time="5m ago" />
-                    <ActivityItem icon={<FileText className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Yorkville Penthouse" time="1h ago" />
-                    <ActivityItem icon={<Calendar className="text-emerald-600" />} title="Showing Scheduled" detail="Bridle Path Manor • Tomorrow at 2:00 PM" time="3h ago" />
+                  <div className="relative space-y-8 before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-luxury-border">
+                    <ActivityItem icon={<Users size={18} className="text-blue-600" />} title="New Lead Acquired" detail="Marcus Thorne expressed interest in 'Forest Hill Modern'" time="5m ago" />
+                    <ActivityItem icon={<FileText size={18} className="text-gold" />} title="Contract Generated" detail="Purchase agreement for Yorkville Penthouse" time="1h ago" />
+                    <ActivityItem icon={<Calendar size={18} className="text-emerald-600" />} title="Showing Scheduled" detail="Bridle Path Manor • Tomorrow at 2:00 PM" time="3h ago" />
                   </div>
                 </div>
 
                 <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 relative overflow-hidden group shadow-sm">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent pointer-events-none" />
-                  <h3 className="text-xl serif mb-4 text-navy">Market Intelligence</h3>
-                  <p className="text-sm text-navy/50 mb-6 leading-relaxed">
-                    Toronto's luxury market is seeing a 4.2% uptick in off-market transactions this month. 
-                    Focus on Bridle Path and Rosedale for maximum GCI protection.
-                  </p>
-                  <div className="flex gap-4">
-                    <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
-                      <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Hot Zone</p>
-                      <p className="text-sm font-bold text-gold">Bridle Path</p>
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-navy/5 rounded-full -ml-24 -mb-24 blur-3xl pointer-events-none" />
+                  
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="space-y-1">
+                      <h3 className="text-xl serif text-navy">Market Intelligence</h3>
+                      <p className="text-xs text-navy/40 font-medium">Real-time Toronto Luxury Sector Analysis</p>
                     </div>
-                    <div className="flex-1 p-4 bg-navy/5 border border-luxury-border rounded-2xl">
-                      <p className="text-[10px] uppercase tracking-widest text-navy/30 mb-1 font-bold">Demand</p>
-                      <p className="text-sm font-bold text-emerald-600">High</p>
+                    <div className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[9px] uppercase tracking-widest font-black text-emerald-600">Bullish Sentiment</span>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-navy/60 mb-8 leading-relaxed max-w-2xl">
+                    Toronto's luxury market is seeing a <span className="text-gold font-bold">4.2% uptick</span> in off-market transactions this month. 
+                    Institutional capital is shifting toward <span className="text-navy font-bold">Bridle Path</span> and <span className="text-navy font-bold">Rosedale</span> for maximum GCI protection.
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="p-6 bg-white/40 backdrop-blur-sm border border-luxury-border rounded-2xl group hover:border-gold/30 transition-all">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center text-gold">
+                          <MapPin size={16} />
+                        </div>
+                        <p className="text-[10px] uppercase tracking-widest text-navy/40 font-bold">Primary Hot Zone</p>
+                      </div>
+                      <p className="text-xl font-bold text-navy mb-1">Bridle Path</p>
+                      <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest">+12% Velocity Increase</p>
+                    </div>
+
+                    <div className="p-6 bg-white/40 backdrop-blur-sm border border-luxury-border rounded-2xl group hover:border-gold/30 transition-all">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+                            <TrendingUp size={16} />
+                          </div>
+                          <p className="text-[10px] uppercase tracking-widest text-navy/40 font-bold">Market Demand</p>
+                        </div>
+                        <span className="text-xs font-black text-emerald-600">92%</span>
+                      </div>
+                      <div className="h-2 w-full bg-navy/5 rounded-full overflow-hidden mb-3">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: '92%' }}
+                          transition={{ duration: 1.5, ease: "easeOut" }}
+                          className="h-full bg-emerald-500"
+                        />
+                      </div>
+                      <p className="text-[10px] text-navy/40 font-medium">Elevated buyer competition in $15M+ tier</p>
                     </div>
                   </div>
                 </div>
@@ -277,16 +318,16 @@ export default function App() {
 }
 
 const ActivityItem = ({ icon, title, detail, time }: { icon: React.ReactNode, title: string, detail: string, time: string }) => (
-  <div className="flex gap-4 items-start group">
-    <div className="w-10 h-10 rounded-xl bg-navy/5 border border-luxury-border flex items-center justify-center shrink-0 group-hover:border-gold/30 transition-colors">
+  <div className="flex gap-4 items-start group relative z-10">
+    <div className="w-10 h-10 rounded-xl bg-white border border-luxury-border flex items-center justify-center shrink-0 group-hover:border-gold/30 group-hover:shadow-lg group-hover:shadow-gold/5 transition-all duration-300 z-10">
       {icon}
     </div>
-    <div className="flex-1 min-w-0">
+    <div className="flex-1 min-w-0 pt-0.5">
       <div className="flex justify-between items-start mb-1">
-        <p className="text-sm font-medium text-navy/90">{title}</p>
-        <span className="text-[10px] text-navy/30 uppercase tracking-tighter font-bold">{time}</span>
+        <p className="text-sm font-bold text-navy group-hover:text-gold transition-colors duration-300">{title}</p>
+        <span className="text-[10px] text-navy/30 uppercase tracking-widest font-black">{time}</span>
       </div>
-      <p className="text-xs text-navy/40 truncate">{detail}</p>
+      <p className="text-xs text-navy/50 leading-relaxed">{detail}</p>
     </div>
   </div>
 );
