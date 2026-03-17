@@ -12,7 +12,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeLeadId, onSelectLead, activeView, onViewChange }) => {
   return (
-    <div className="w-80 h-full border-r border-luxury-border flex flex-col bg-white text-navy shadow-sm">
+    <div className="w-80 h-full border-r border-luxury-border flex flex-col bg-luxury-gray text-navy shadow-sm">
       <div className="p-8">
         <h1 className="text-2xl font-bold tracking-tighter serif flex items-center gap-2 text-navy">
           <ShieldCheck className="text-gold w-8 h-8" />
@@ -60,8 +60,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeLeadId, onSelectLead, ac
               }}
               className={`w-full text-left p-4 rounded-xl transition-all duration-300 border ${
                 activeLeadId === lead.id && activeView === 'messages'
-                  ? 'bg-gold/5 border-gold/30' 
-                  : 'border-transparent hover:bg-slate-50'
+                  ? 'bg-gold/10 border-gold/30' 
+                  : 'border-transparent hover:bg-white/5'
               }`}
             >
               <div className="flex justify-between items-start mb-1">
@@ -93,7 +93,7 @@ const NavItem = ({ icon, label, active = false, onClick }: { icon: React.ReactNo
   <button 
     onClick={onClick}
     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
-      active ? 'bg-navy text-white font-semibold shadow-lg' : 'text-navy/60 hover:text-navy hover:bg-slate-50'
+      active ? 'bg-gold text-white font-semibold shadow-lg' : 'text-navy/60 hover:text-navy hover:bg-white/5'
     }`}
   >
     {icon}

@@ -3,7 +3,7 @@ import { Search, Bell, User, Globe, ShieldCheck } from 'lucide-react';
 
 export const Header: React.FC = () => {
   return (
-    <header className="h-20 border-b border-luxury-border bg-white/50 backdrop-blur-xl flex items-center justify-between px-8 sticky top-0 z-50">
+    <header className="h-20 border-b border-luxury-border bg-luxury-gray/50 backdrop-blur-xl flex items-center justify-between px-8 sticky top-0 z-50">
       <div className="flex items-center gap-8 flex-1 max-w-2xl">
         <div className="relative flex-1 group">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-navy/30 group-focus-within:text-gold transition-colors" size={18} />
@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
         
         <button className="relative p-2 text-navy/50 hover:text-navy transition-colors">
           <Bell size={20} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-gold rounded-full border-2 border-white" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-gold rounded-full border-2 border-luxury-gray" />
         </button>
 
         <div className="h-8 w-px bg-luxury-border mx-2" />
@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
             <p className="text-[10px] text-navy/40 uppercase tracking-tighter">Principal Broker</p>
           </div>
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-light p-0.5">
-            <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+            <div className="w-full h-full rounded-full bg-luxury-gray flex items-center justify-center overflow-hidden">
               <User size={20} className="text-gold" />
             </div>
           </div>

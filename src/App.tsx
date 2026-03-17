@@ -52,7 +52,7 @@ export default function App() {
 
             {/* Engagement Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-white border border-luxury-border rounded-3xl p-8 shadow-sm">
+              <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 shadow-sm">
                 <div className="flex justify-between items-center mb-8">
                   <h3 className="text-xl serif text-navy">Recent Activity</h3>
                   <button className="text-[10px] uppercase tracking-widest text-gold hover:text-gold-light transition-colors font-bold">View All</button>
@@ -64,7 +64,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="bg-white border border-luxury-border rounded-3xl p-8 relative overflow-hidden group shadow-sm">
+              <div className="bg-luxury-gray border border-luxury-border rounded-3xl p-8 relative overflow-hidden group shadow-sm">
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent pointer-events-none" />
                 <h3 className="text-xl serif mb-4 text-navy">Market Intelligence</h3>
                 <p className="text-sm text-navy/50 mb-6 leading-relaxed">
@@ -89,7 +89,7 @@ export default function App() {
         return (
           <div className="flex-1 flex overflow-hidden">
             <ChatWindow activeLead={activeLead} />
-            <div className="w-80 border-l border-luxury-border bg-white p-8 hidden xl:block overflow-y-auto">
+            <div className="w-80 border-l border-luxury-border bg-luxury-gray p-8 hidden xl:block overflow-y-auto">
               <h3 className="text-xs uppercase tracking-widest text-navy/40 mb-6 font-bold">Property Details</h3>
               <div className="aspect-[4/5] rounded-2xl bg-navy/5 border border-luxury-border mb-6 overflow-hidden relative group">
                 <img 
@@ -98,7 +98,7 @@ export default function App() {
                   className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-luxury-gray to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <p className="text-lg serif font-medium text-navy">{activeLead.property}</p>
                   <p className="text-xs text-gold font-bold">{activeLead.value}</p>
@@ -125,14 +125,14 @@ export default function App() {
             <h2 className="text-3xl serif mb-8 text-navy">Lead Management</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {MOCK_LEADS.map(lead => (
-                <div key={lead.id} className="bg-white border border-luxury-border p-6 rounded-3xl flex justify-between items-center shadow-sm">
+                <div key={lead.id} className="bg-luxury-gray border border-luxury-border p-6 rounded-3xl flex justify-between items-center shadow-sm">
                   <div>
                     <h4 className="text-lg font-medium text-navy">{lead.name}</h4>
                     <p className="text-xs text-navy/40">{lead.property}</p>
                   </div>
                   <button 
                     onClick={() => { setActiveLead(lead); setActiveView('messages'); }}
-                    className="px-4 py-2 bg-gold text-navy text-xs font-bold rounded-xl"
+                    className="px-4 py-2 bg-gold text-white text-xs font-bold rounded-xl"
                   >
                     View Details
                   </button>
@@ -146,7 +146,7 @@ export default function App() {
           <div className="p-8 max-w-2xl">
             <h2 className="text-3xl serif mb-8 text-navy">Account Settings</h2>
             <div className="space-y-6">
-              <div className="p-6 bg-white border border-luxury-border rounded-3xl shadow-sm">
+              <div className="p-6 bg-luxury-gray border border-luxury-border rounded-3xl shadow-sm">
                 <h4 className="text-sm font-bold mb-4 text-navy">Profile Information</h4>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">

@@ -173,7 +173,7 @@ export const OnboardingTour: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
-          className="absolute pointer-events-auto bg-white border-2 border-gold/50 p-10 rounded-[2rem] shadow-[0_40px_80px_rgba(0,0,0,0.4)] w-[440px] z-[10000]"
+          className="absolute pointer-events-auto bg-luxury-gray border-2 border-gold/50 p-10 rounded-[2rem] shadow-[0_40px_80px_rgba(0,0,0,0.6)] w-[440px] z-[10000]"
           style={getTooltipStyle()}
         >
           <div className="flex justify-between items-start mb-8">
@@ -188,7 +188,7 @@ export const OnboardingTour: React.FC = () => {
             </div>
           </div>
 
-          <p className="text-base text-navy/70 leading-relaxed mb-10 font-medium">
+          <p className="text-base text-navy/80 leading-relaxed mb-10 font-medium">
             {step.content}
           </p>
 
@@ -204,13 +204,13 @@ export const OnboardingTour: React.FC = () => {
             
             <div className="flex gap-2">
               {TOUR_STEPS.map((_, i) => (
-                <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === currentStep ? 'bg-gold w-8' : 'bg-navy/10 w-1.5'}`} />
+                <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === currentStep ? 'bg-gold w-8' : 'bg-navy/20 w-1.5'}`} />
               ))}
             </div>
 
             <button 
               onClick={handleNext}
-              className="flex items-center gap-3 bg-navy text-white px-8 py-3.5 rounded-2xl text-sm font-black hover:bg-gold transition-all shadow-xl hover:shadow-gold/20"
+              className="flex items-center gap-3 bg-gold text-white px-8 py-3.5 rounded-2xl text-sm font-black hover:bg-gold/80 transition-all shadow-xl hover:shadow-gold/20"
             >
               {currentStep === TOUR_STEPS.length - 1 ? 'Finish' : 'Next'}
               <ChevronRight size={18} />

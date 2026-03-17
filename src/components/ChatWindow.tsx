@@ -68,7 +68,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
   return (
     <div id="tour-chat" className="flex-1 flex flex-col bg-luxury-black relative">
       {/* Chat Header */}
-      <div className="p-6 border-b border-luxury-border flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-10">
+      <div className="p-6 border-b border-luxury-border flex justify-between items-center bg-luxury-gray/80 backdrop-blur-md sticky top-0 z-10">
         <div>
           <h2 className="text-xl serif font-medium text-navy">{activeLead.name}</h2>
           <p className="text-xs text-navy/40">{activeLead.property} • {activeLead.value}</p>
@@ -98,7 +98,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
                 <div className={`p-4 rounded-2xl text-sm leading-relaxed ${
                   msg.role === 'user' 
                     ? 'bg-gold text-white font-medium rounded-tr-none shadow-sm' 
-                    : 'bg-white border border-luxury-border text-navy/90 rounded-tl-none shadow-sm'
+                    : 'bg-luxury-gray border border-luxury-border text-navy/90 rounded-tl-none shadow-sm'
                 }`}>
                   {msg.content}
                 </div>
@@ -111,7 +111,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
             <div className="w-8 h-8 rounded-full bg-navy/5 border border-navy/10 flex items-center justify-center text-navy/50">
               <ShieldCheck size={16} className="animate-pulse" />
             </div>
-            <div className="bg-white border border-luxury-border p-4 rounded-2xl rounded-tl-none shadow-sm">
+            <div className="bg-luxury-gray border border-luxury-border p-4 rounded-2xl rounded-tl-none shadow-sm">
               <div className="flex gap-1">
                 <div className="w-1.5 h-1.5 bg-gold/50 rounded-full animate-bounce" />
                 <div className="w-1.5 h-1.5 bg-gold/50 rounded-full animate-bounce [animation-delay:0.2s]" />
@@ -122,7 +122,6 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
         )}
       </div>
 
-      {/* Input Area */}
       <div className="p-6 bg-luxury-black">
         <div className="relative max-w-4xl mx-auto">
           <input
@@ -131,12 +130,12 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Instruct ARGUS AI..."
-            className="w-full bg-white border border-luxury-border rounded-2xl py-4 pl-6 pr-16 text-sm text-navy focus:outline-none focus:border-gold/50 transition-colors shadow-sm"
+            className="w-full bg-luxury-gray border border-luxury-border rounded-2xl py-4 pl-6 pr-16 text-sm text-navy focus:outline-none focus:border-gold/50 transition-colors shadow-sm"
           />
           <button
             onClick={handleSend}
             disabled={isLoading || !input.trim()}
-            className="absolute right-2 top-2 bottom-2 px-4 bg-gold text-navy rounded-xl hover:bg-gold-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute right-2 top-2 bottom-2 px-4 bg-gold text-white rounded-xl hover:bg-gold/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send size={18} />
           </button>

@@ -31,12 +31,12 @@ export const LiveChatWidget: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="absolute bottom-20 right-0 w-96 h-[500px] bg-white border border-luxury-border rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+            className="absolute bottom-20 right-0 w-96 h-[500px] bg-luxury-gray border border-luxury-border rounded-3xl shadow-2xl flex flex-col overflow-hidden"
           >
-            <div className="p-6 bg-navy text-white flex justify-between items-center">
+            <div className="p-6 bg-gold text-white flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Sparkles size={20} className="text-gold" />
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <Sparkles size={20} className="text-white" />
                 </div>
                 <div>
                   <p className="text-sm font-bold tracking-tight">ARGUS Concierge</p>
@@ -54,7 +54,7 @@ export const LiveChatWidget: React.FC = () => {
                   <div className={`max-w-[85%] p-4 rounded-2xl text-xs leading-relaxed shadow-sm ${
                     msg.role === 'user' 
                       ? 'bg-gold text-white font-medium rounded-tr-none' 
-                      : 'bg-white border border-luxury-border text-navy/80 rounded-tl-none'
+                      : 'bg-luxury-gray border border-luxury-border text-navy/80 rounded-tl-none'
                   }`}>
                     {msg.content}
                   </div>
@@ -62,7 +62,7 @@ export const LiveChatWidget: React.FC = () => {
               ))}
             </div>
 
-            <div className="p-4 border-t border-luxury-border bg-white">
+            <div className="p-4 border-t border-luxury-border bg-luxury-gray">
               <div className="relative">
                 <input
                   type="text"
@@ -86,12 +86,12 @@ export const LiveChatWidget: React.FC = () => {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-16 h-16 rounded-full bg-navy text-white shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group"
+        className="w-16 h-16 rounded-full bg-gold text-white shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group"
       >
         {isOpen ? <X size={24} /> : (
           <div className="relative">
             <MessageCircle size={24} />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold rounded-full border-2 border-navy" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-gold" />
           </div>
         )}
       </button>
