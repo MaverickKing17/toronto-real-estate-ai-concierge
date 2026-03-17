@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, User, Bot, ShieldCheck } from 'lucide-react';
+import { Send, User, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { GoogleGenAI } from "@google/genai";
 import { Lead, SYSTEM_INSTRUCTION } from '../constants';
 
 interface Message {
@@ -35,30 +36,34 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ activeLead }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })),
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+      const response = await ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        contents: [...messages, userMessage].map(m => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }]
+        })),
+        config: {
           systemInstruction: SYSTEM_INSTRUCTION
-        })
+        }
       });
 
-      const data = await response.json();
+      const text = response.text;
       
-      if (data.choices && data.choices[0]) {
+      if (text) {
         setMessages(prev => [...prev, { 
           role: 'assistant', 
-          content: data.choices[0].message.content 
+          content: text 
         }]);
       } else {
-        throw new Error(data.error || 'Failed to get response');
+        throw new Error('Empty response from AI');
       }
     } catch (error) {
       console.error('Chat error:', error);
+      const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: "I apologize, but I encountered a technical interruption. Please ensure your OpenRouter API key is correctly configured." 
+        content: `I apologize, but I encountered a technical interruption: ${errorMessage}. Please ensure the platform configuration is correct.` 
       }]);
     } finally {
       setIsLoading(false);

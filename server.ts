@@ -13,39 +13,9 @@ async function startServer() {
   app.use(cors());
   app.use(express.json());
 
-  // OpenRouter Proxy Endpoint
-  app.post("/api/chat", async (req, res) => {
-    const { messages, systemInstruction } = req.body;
-    const apiKey = process.env.OPENROUTER_API_KEY;
-
-    if (!apiKey) {
-      return res.status(500).json({ error: "OPENROUTER_API_KEY is not configured in environment variables." });
-    }
-
-    try {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "HTTP-Referer": process.env.APP_URL || "http://localhost:3000",
-          "X-Title": "ARGUS Luxury Dashboard",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "openai/gpt-4o-mini", // Default high-quality model
-          messages: [
-            { role: "system", content: systemInstruction },
-            ...messages
-          ]
-        })
-      });
-
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("OpenRouter Proxy Error:", error);
-      res.status(500).json({ error: "Failed to communicate with OpenRouter" });
-    }
+  // API routes go here
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok" });
   });
 
   // Vite middleware for development

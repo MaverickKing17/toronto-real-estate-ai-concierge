@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { MessageCircle, X, Send, ShieldCheck, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { GoogleGenAI } from "@google/genai";
+import { SYSTEM_INSTRUCTION } from '../constants';
 
 export const LiveChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,19 +10,38 @@ export const LiveChatWidget: React.FC = () => {
     { role: 'assistant', content: 'Hello Julian. I am your ARGUS Concierge. How can I assist with your portfolio today?' }
   ]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    setMessages([...messages, { role: 'user', content: input }]);
-    setInput('');
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
     
-    // Simulate AI response
-    setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: "I'm analyzing the latest Toronto market trends for your active listings. One moment..." 
-      }]);
-    }, 1000);
+    const userMessage = { role: 'user', content: input };
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
+    
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+      const response = await ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        contents: [...messages, userMessage].map(m => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }]
+        })),
+        config: {
+          systemInstruction: SYSTEM_INSTRUCTION
+        }
+      });
+
+      const text = response.text;
+      if (text) {
+        setMessages(prev => [...prev, { role: 'assistant', content: text }]);
+      }
+    } catch (error) {
+      console.error('Concierge error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,6 +81,17 @@ export const LiveChatWidget: React.FC = () => {
                   </div>
                 </div>
               ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-luxury-gray border border-luxury-border p-3 rounded-2xl rounded-tl-none shadow-sm">
+                    <div className="flex gap-1">
+                      <div className="w-1 h-1 bg-gold/50 rounded-full animate-bounce" />
+                      <div className="w-1 h-1 bg-gold/50 rounded-full animate-bounce [animation-delay:0.2s]" />
+                      <div className="w-1 h-1 bg-gold/50 rounded-full animate-bounce [animation-delay:0.4s]" />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="p-4 border-t border-luxury-border bg-luxury-gray">
